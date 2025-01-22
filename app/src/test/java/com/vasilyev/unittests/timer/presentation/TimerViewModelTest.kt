@@ -69,7 +69,7 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `when StartTimer intent and input is not empty, timer should start`() = runTest {
+    fun `check that timer start works correctly`() = runTest {
         val viewModel = getDefaultViewModel()
 
         coEvery { getTimerValueUseCase.invoke() } returns flowOf(60000)
@@ -128,7 +128,7 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `pause should not be able if timer is not running`() {
+    fun `pause should not be available if timer is not running`() {
         val viewModel = getDefaultViewModel()
 
         viewModel.reduce(TimerIntent.PauseTimer)
