@@ -11,9 +11,3 @@ data class TimerState(
     val isPaused: Boolean = false,
     val isInputEmpty: Boolean = false
 )
-
-
-// Dependency Injection
-// MVI
-// Clean Architecture
-// Repository, Dependency Injection, Singleton, State

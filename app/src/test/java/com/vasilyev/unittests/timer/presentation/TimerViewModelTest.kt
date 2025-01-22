@@ -187,7 +187,7 @@ class TimerViewModelTest {
 
         val state = viewModel.state.value
 
-        assertFalse(state.isRunning)
+        assertFalse(state.isRunning)    
         assertEquals(0, state.timerValue)
     }
 

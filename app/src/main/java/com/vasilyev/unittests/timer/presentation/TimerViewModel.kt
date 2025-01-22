@@ -15,7 +15,13 @@ import javax.inject.Inject
 class TimerViewModel @Inject constructor(
     private val getTimerValueUseCase: GetTimerValueUseCase,
     private val saveTimerValueUseCase: SaveTimerValueUseCase
-) : ViewModel() {
+): ViewModel() {
+    companion object {
+        private const val MILLIS_IN_SECOND = 1000
+        private const val SECONDS_IN_MINUTE = 60
+        private const val ZERO_TIME = 0L
+    }
+
     private val _state = MutableStateFlow(TimerState())
     val state = _state.asStateFlow()
 
@@ -35,7 +41,7 @@ class TimerViewModel @Inject constructor(
                         } else {
                             clearInput()
                         }
-                    } else if (state.value.timerValue == 0L) {
+                    } else if (state.value.timerValue == ZERO_TIME) {
                         setIsInputEmpty(true)
                     } else {
                         startTimer()
@@ -81,7 +87,7 @@ class TimerViewModel @Inject constructor(
             return
         }
 
-        updateTimer(state.value.inputTimerValue.toLong() * 1000)
+        updateTimer(state.value.inputTimerValue.toLong() * MILLIS_IN_SECOND)
         startTimer()
     }
 
@@ -108,9 +114,9 @@ class TimerViewModel @Inject constructor(
     }
 
     private fun formatTime(timeMillis: Long): String {
-        val totalSeconds = timeMillis / 1000
-        val minutes = totalSeconds / 60
-        val seconds = totalSeconds % 60
+        val totalSeconds = timeMillis / MILLIS_IN_SECOND
+        val minutes = totalSeconds / SECONDS_IN_MINUTE
+        val seconds = totalSeconds % SECONDS_IN_MINUTE
 
         return String.format("%02d:%02d", minutes, seconds)
     }
@@ -134,7 +140,7 @@ class TimerViewModel @Inject constructor(
     }
 
     private suspend fun stopTimer() {
-        updateTimer(0L)
+        updateTimer(ZERO_TIME)
         setRunning(false)
         setPaused(false)
     }

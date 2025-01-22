@@ -29,7 +29,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.sql.Time
 
 
 private fun startTimer(
@@ -175,6 +174,7 @@ private fun TimerText(
     value: String
 ) {
     Text(
+        modifier = Modifier,
         text = value,
         fontSize = 38.sp,
     )
